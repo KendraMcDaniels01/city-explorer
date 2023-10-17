@@ -8,15 +8,17 @@ constructor(props) {
       this.state = {
         latitude: null,
         longitude: null,
+        mapImageUrl: null,
       };
     }
 
 handleSearch = () => {
   const keyword = document.getElementById('keyword').value;
+  const apiKey = 'pk.4995faaadeef3569e8b22f23098a6a71';
 
-const apiKey = 'pk.4995faaadeef3569e8b22f23098a6a71';
 
-// code from chatgpt
+
+
 axios
   .get(`https://us1.locationiq.com/v1/search.php?key=${apiKey}&q=${keyword}&format=json`)
   .then((response) => {
@@ -26,20 +28,34 @@ axios
   .catch((error) => {
   console.error('Error fetching data:', error);
   });
+  const { latitude, longitude } = this.state;
+
+  if (latitude && longitude) {
+
+
+    const mapImageUrl = `https://maps.locationiq.com/v3/staticmap?key=${apiKey}&center=${latitude},${longitude}&zoom=14&size=600x400`;
+
+    this.setState({ mapImageUrl });
+  }
+
 };
+
 
 render() {
   return (
   <main>   
     <section>
-      <h2>Location Details</h2>
-      <button id="btnSearch" onClick={this.handleSearch}>Search</button>
+      <button id="btnSearch" onClick={this.handleSearch}>Explore!</button>
         <p>Latitude: {this.state.latitude}</p>
         <p>Longitude: {this.state.longitude}</p>
+        <h2>Location Details</h2>
       </section>
     <section>
-      <h2>Maps</h2>
-      <img src="https://placehold.co/600x400" alt="placeholder map image" />
+    {this.state.mapImageUrl ? (
+          <img src={this.state.mapImageUrl} alt="City Map" />
+        ) : (
+          <img src="https://placehold.co/600x400" alt="placeholder map image" />
+        )}
     </section>
         </main>
       )

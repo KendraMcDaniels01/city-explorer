@@ -36,6 +36,15 @@ Estimate of time needed to complete: 1hr 30min
 
 Start time: 10:00
 
+Finish time: 11:30
+
+Actual time needed to complete: 1hr 30min
+
+3.Map
+Estimate of time needed to complete: 30min
+
+Start time: 11:30
+
 Finish time: 
 
 Actual time needed to complete: 
