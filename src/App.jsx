@@ -1,15 +1,28 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
+import Explorer from  './components/Explorer';
 
-const API_KEY = 'pk.4995faaadeef3569e8b22f23098a6a71';
 
 function App() {
   return (
     <>
+      <div className="App">
+      <header>
+    <h1>City Explorer</h1>
+    </header>
+    <nav>
+      <input
+        type="text"
+        id="keyword"
+        name="keyword"
+        placeholder="keyword OR lat,lon"
+      />
+    </nav>  
+        <Explorer />
 
+      </div>
     </>
   )
 }
 
-export default App
+export default App;

@@ -21,7 +21,7 @@
 
 ## Time Estimates
 
-1. Set up your React repository & API keys
+1.Set up your React repository & API keys
 
 Estimate of time needed to complete: 30min
 
@@ -30,3 +30,12 @@ Start time: 4:15
 Finish time: 5:30
 
 Actual time needed to complete: 1hr 15min
+
+2.Locations
+Estimate of time needed to complete: 1hr 30min
+
+Start time: 10:00
+
+Finish time: 
+
+Actual time needed to complete: 
