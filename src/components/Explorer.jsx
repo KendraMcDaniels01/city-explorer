@@ -44,9 +44,9 @@ render() {
   <main>   
     <section>
       <button id="btnSearch" onClick={this.handleSearch}>Search</button>
+        <h2>Location Details</h2>
         <p>Latitude: {this.state.latitude}</p>
         <p>Longitude: {this.state.longitude}</p>
-        <h2>Location Details</h2>
       </section>
     <section>
     {this.state.errorMessage ? <p className="error-message">{this.state.errorMessage}</p> : this.state.mapImageUrl ? (
