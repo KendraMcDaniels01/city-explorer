@@ -10,6 +10,7 @@ constructor(props) {
         longitude: null,
         mapImageUrl: null,
         errorMessage: null,
+        forcast: null,
       };
     }
 
@@ -22,22 +23,37 @@ axios
   .then((response) => {
   const { lat, lon } = response.data[0];
   this.setState({ latitude: lat, longitude: lon });
-  })
-  .catch((error) => {
-  console.error('Error fetching data:', error);
-  });
-  const { latitude, longitude } = this.state;
+   if (keyword) {
 
-  if (latitude && longitude) {
-
-    const mapImageUrl = `https://maps.locationiq.com/v3/staticmap?key=${apiKey}&center=${latitude},${longitude}&zoom=14&size=600x400`;
+    const mapImageUrl = `https://maps.locationiq.com/v3/staticmap?key=${apiKey}&center=${lat},${lon}&zoom=14&size=600x400`;
 
     this.setState({ mapImageUrl });  
 
   } else {this.setState({ errorMessage: "Unable to geocode"});
   }
+  })
+  .catch((error) => {
+  console.error('Error fetching data:', error);
+  });
 };
 
+handleGetWeather = () => {
+  const { latitude, longitude } = this.state;
+
+  if (latitude && longitude) {
+    axios
+      .get(`http://localhost:3001/weather?lat=${latitude}&lon=${longitude}&searchQuery=${this.state.keyword}`)
+      .then((response) => {
+        this.setState({ forecast: response.data });
+      })
+      .catch((error) => {
+        console.error('Error fetching weather data:', error);
+        this.setState({ errorMessage: 'Failed to retrieve weather data' });
+      });
+  } else {
+    this.setState({ errorMessage: 'Latitude and longitude are required for weather data' });
+  }
+};
 
 render() {
   return (
@@ -55,6 +71,11 @@ render() {
           <img src="https://placehold.co/600x400" alt="placeholder map image" />
         )}
     </section>
+    <section>
+        <h2>Weather Details</h2>
+        <button id="btnWeather" onClick={this.handleGetWeather}>Get Weather</button>
+        <p>{this.state.forcast}</p>
+      </section>
         </main>
       )
     }
