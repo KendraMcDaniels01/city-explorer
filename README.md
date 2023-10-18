@@ -19,6 +19,10 @@
 
 ## Credit and Collaborations
 
+## Lighthouse
+
+![Alt text](src/assets/CityExplorerLighthouse.jpg)
+
 ## Time Estimates
 
 1.Set up your React repository & API keys
