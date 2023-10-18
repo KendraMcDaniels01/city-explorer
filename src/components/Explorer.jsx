@@ -6,17 +6,21 @@ class Explorer extends React.Component {
 constructor(props) {
       super(props);
       this.state = {
+        keyword: null,
         latitude: null,
         longitude: null,
         mapImageUrl: null,
         errorMessage: null,
         forcast: null,
+        movies: null,
       };
     }
 
 handleSearch = () => {
   const keyword = document.getElementById('keyword').value;
+  this.setState({keyword: keyword});
   const apiKey = 'pk.4995faaadeef3569e8b22f23098a6a71';
+
 
 axios
   .get(`https://us1.locationiq.com/v1/search.php?key=${apiKey}&q=${keyword}&format=json`)
@@ -31,18 +35,10 @@ axios
 
   } else {this.setState({ errorMessage: "Unable to geocode"});
   }
-  })
-  .catch((error) => {
-  console.error('Error fetching data:', error);
-  });
-};
-
-handleGetWeather = () => {
-  const { latitude, longitude } = this.state;
-
-  if (latitude && longitude) {
+if (lat && lon) {
+    // Make an Axios request to get weather data
     axios
-      .get(`http://localhost:3001/weather?lat=${latitude}&lon=${longitude}&searchQuery=${this.state.keyword}`)
+      .get(`http://localhost:3001/weather?lat=${lat}&lon=${lon}&searchQuery=${keyword}`)
       .then((response) => {
         this.setState({ forecast: response.data });
       })
@@ -50,10 +46,27 @@ handleGetWeather = () => {
         console.error('Error fetching weather data:', error);
         this.setState({ errorMessage: 'Failed to retrieve weather data' });
       });
+
+    // Make an Axios request to get movie data
+    axios
+      .get(`http://localhost:3001/movies?searchQuery=${keyword}`)
+      .then((response) => {
+        this.setState({ movies: response.data });
+      })
+      .catch((error) => {
+        console.error('Error fetching movie data:', error);
+        this.setState({ errorMessage: 'Failed to retrieve movie data' });
+      });
   } else {
     this.setState({ errorMessage: 'Latitude and longitude are required for weather data' });
   }
+
+  })
+  .catch((error) => {
+  console.error('Error fetching data:', error);
+  }); 
 };
+
 
 render() {
   return (
@@ -73,8 +86,8 @@ render() {
     </section>
     <section>
         <h2>Weather Details</h2>
-        <button id="btnWeather" onClick={this.handleGetWeather}>Get Weather</button>
         <p>{this.state.forcast}</p>
+        <p>{this.state.movies}</p>
       </section>
         </main>
       )
