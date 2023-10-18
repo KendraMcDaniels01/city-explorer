@@ -1,5 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import WeatherDay from './WeatherDay';
+import Movie from './Movie';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 class Explorer extends React.Component {
 
@@ -70,28 +74,43 @@ if (lat && lon) {
 
 render() {
   return (
-  <main>   
-    <section>
-      <button id="btnSearch" onClick={this.handleSearch}>Search</button>
+    <main>
+      <section>
+        <button id="btnSearch" onClick={this.handleSearch}>
+          Search
+        </button>
         <h2>Location Details</h2>
         <p>Latitude: {this.state.latitude}</p>
         <p>Longitude: {this.state.longitude}</p>
       </section>
-    <section>
-    {this.state.errorMessage ? <p className="error-message">{this.state.errorMessage}</p> : this.state.mapImageUrl ? (
-          <img src={this.state.mapImageUrl} alt="City Map" />
+      <section>
+        {this.state.errorMessage ? (
+          <p className="error-message">{this.state.errorMessage}</p>
+        ) : this.state.mapImageUrl ? (
+          <img src={this.state.mapImageUrl}  alt="City Map" />
         ) : (
           <img src="https://placehold.co/600x400" alt="placeholder map image" />
         )}
-    </section>
-    <section>
-        <h2>Weather Details</h2>
-        <p>{this.state.forcast}</p>
-        <p>{this.state.movies}</p>
       </section>
-        </main>
-      )
-    }
-  }
+      <section>
+        <h2>Weather Details</h2>
+        <div>
+          {this.state.forecast &&
+            this.state.forecast.map((day) => (
+              <WeatherDay key={day.date} date={day.date} description={day.description} />
+            ))}
+        </div>
+        <h2>Movies</h2>
+        <div>
+          {this.state.movies &&
+            this.state.movies.map((movie, index) => (
+              <Movie key={index} title={movie.title} release={movie.release} overview={movie.overview} />
+            ))}
+        </div>
+      </section>
+    </main>
+  );
+}
+}
 
 export default Explorer;
