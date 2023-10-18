@@ -1,29 +1,29 @@
 # city explorer
 
 **Author**: Kendra McDaniels
-**Version**: 1.0.0 (increment the patch/fix version number if you make more commits past your first submission)
+**Version**: 1.0.0
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+
+Application takes in a user input for a city and then outputs the longitude and latitude along with a map by using LocationIQ. The application also utilizes a custom server that handles two additional API, themoviedb and weatherbit, to get the weather for the location the user has input as well as any movies with the location in the title.
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+
+API Key for LocationIQ required
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
 
-## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
+Language: Javascript
+Also using React, Bootstrap, and a custom API server
+Utilizing LocationIQ
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
-
-## Credit and Collaborations
-
-## Lighthouse
+### Lighthouse
 
 ![Alt text](src/assets/CityExplorerLighthouse.jpg)
 
-## Time Estimates
+## Change Log
+
+### lab6
 
 1.Set up your React repository & API keys
 
